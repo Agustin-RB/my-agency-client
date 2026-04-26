@@ -17,6 +17,8 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Build React app
         run: cd app && npm install --legacy-peer-deps && npm run build
+        env:
+          CI: false
       - name: Make DMG
         run: npm run make -- --platform=darwin
       - name: Upload DMG
@@ -35,6 +37,8 @@ jobs:
         run: npm install --legacy-peer-deps
       - name: Build React app
         run: cd app && npm install --legacy-peer-deps && npm run build
+        env:
+          CI: false
       - name: Make EXE
         run: npm run make -- --platform=win32
       - name: Upload EXE
