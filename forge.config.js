@@ -36,6 +36,8 @@ module.exports = {
       platforms: ['win32'],
       config: {
         name: 'my_agency',
+        authors: 'My Agency',
+        description: 'My Agency Desktop Client',
       },
     },
     {
