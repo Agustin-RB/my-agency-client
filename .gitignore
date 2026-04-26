@@ -1,0 +1,16 @@
+node_modules/
+out/
+.DS_Store
+app/node_modules/
+app/build/
+*.log
+.npm-cache/
+.vite/
+agency-profile.json
+google-calendar-credentials.json
+google-calendar-token.json
+local-accounts.json
+user-profile.json
+iniciar-desktop.sh
+run-electron.sh
+test-psd/

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#667eea" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <script>
+      (function(){
+        if (typeof window.electron === 'undefined') {
+          var demos = ['Agencia de marketing','Brand Identity','E-commerce App','Packaging Cerveza Artesanal','Campaña Redes Sociales','Revista Diseño Interior','App Fitness Tracker','Ilustraciones Libro Infantil','Identidad Visual Restaurante','Catálogo Muebles 2024'];
+          window.electron = {
+            invoke: function(ch, a1, a2) {
+              if (ch === 'list-projects') return Promise.resolve(demos);
+              if (ch === 'list-psd-files' || ch === 'list-file-versions') return Promise.resolve([]);
+              if (ch === 'get-file-mtime') return Promise.resolve({ mtime: 0 });
+              if (ch === 'watch-file') return Promise.resolve({ success: true });
+              if (ch === 'open-file-dialog' || ch === 'convert-to-png' || ch === 'open-in-design-app') return Promise.resolve({ error: 'Ejecutá con Electron para esta función' });
+              if (ch === 'get-file-base64') return Promise.resolve({ error: 'No disponible' });
+              if (ch === 'get-file-info') return Promise.resolve(null);
+              if (ch === 'save-file-version') return Promise.resolve({ error: 'No disponible' });
+              if (ch === 'create-project') return Promise.resolve({ error: 'No disponible' });
+              return Promise.resolve(null);
+            },
+            on: function() {}
+          };
+        }
+      })();
+    </script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

@@ -1,0 +1,146 @@
+:root {
+  /* === DESIGNER COLLAB — Dark Studio === */
+
+  /* Accent primario: violeta suave */
+  --color-primary: #9580FF;
+  --color-primary-dark: #7C5CFC;
+  --color-primary-light: rgba(149, 128, 255, 0.12);
+  --color-primary-hover: #A690FF;
+
+  /* Accent secundario: ámbar cálido */
+  --color-accent: #F5C842;
+  --color-accent-dim: rgba(245, 200, 66, 0.15);
+
+  /* Texto */
+  --color-text-primary: #EEEAF8;
+  --color-text-secondary: #7B7890;
+  --color-text-muted: #4E4C65;
+
+  /* Fondos */
+  --color-bg-app: #0D0D11;
+  --color-bg-sidebar: #111116;
+  --color-bg-card: #17171D;
+  --color-bg-input: #1C1C25;
+  --color-bg-hover: rgba(255, 255, 255, 0.03);
+  --color-bg-elevated: #1F1F28;
+
+  /* Bordes */
+  --color-border: #222230;
+  --color-border-light: #1A1A24;
+
+  /* Sombras */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 8px 28px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(149, 128, 255, 0.1);
+  --shadow-modal: 0 24px 80px rgba(0, 0, 0, 0.85), 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-sidebar: 1px 0 0 #1A1A24;
+
+  /* Radios */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* Tipografía */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Compatibilidad legacy */
+  --gradient-primary: #0D0D11;
+  --gradient-sidebar: #111116;
+  --gradient-card: #17171D;
+  --gradient-soft: #1A1A24;
+  --gradient-accent: rgba(149, 128, 255, 0.12);
+  --gradient-btn: #9580FF;
+  --gradient-btn-hover: #7C5CFC;
+  --color-accent-cyan: #22D3EE;
+  --color-accent-mint: #34D399;
+  --color-accent-amber: #F5C842;
+  --color-border-soft: #222230;
+  --color-shadow-soft: rgba(0, 0, 0, 0.4);
+}
+
+/* ── Light theme ───────────────────────────────────────────────── */
+body[data-theme="light"] {
+  --color-primary: #7C5CFC;
+  --color-primary-dark: #6040F0;
+  --color-primary-light: rgba(124, 92, 252, 0.1);
+  --color-primary-hover: #8B6EFD;
+
+  --color-accent: #C4900A;
+  --color-accent-dim: rgba(196, 144, 10, 0.12);
+
+  --color-text-primary: #1A1726;
+  --color-text-secondary: #574E72;
+  --color-text-muted: #9B93B8;
+
+  --color-bg-app: #F2F1F8;
+  --color-bg-sidebar: #FAFAFE;
+  --color-bg-card: #FFFFFF;
+  --color-bg-input: #EDEAF8;
+  --color-bg-hover: rgba(0, 0, 0, 0.04);
+  --color-bg-elevated: #FFFFFF;
+
+  --color-border: #DDD9EF;
+  --color-border-light: #EAE7F6;
+
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-card-hover: 0 8px 28px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(124,92,252,0.12);
+  --shadow-modal: 0 24px 80px rgba(0,0,0,0.14), 0 8px 32px rgba(0,0,0,0.08);
+  --shadow-sidebar: 1px 0 0 #DDD9EF;
+
+  --gradient-primary: #F2F1F8;
+  --gradient-sidebar: #FAFAFE;
+  --gradient-card: #FFFFFF;
+  --gradient-soft: #EAE7F6;
+  --gradient-accent: rgba(124, 92, 252, 0.1);
+  --gradient-btn: #7C5CFC;
+  --gradient-btn-hover: #6040F0;
+  --color-border-soft: #DDD9EF;
+  --color-shadow-soft: rgba(0,0,0,0.08);
+}
+
+body[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #C8C3DE;
+}
+
+body[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #B0ABCC;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-bg-app);
+  color: var(--color-text-primary);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Scrollbars globales */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2A38;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3A3A50;
+}

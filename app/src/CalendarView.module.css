@@ -1,0 +1,570 @@
+/* ── Layout ────────────────────────────────────────────────────── */
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 28px 0 28px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* ── Header ────────────────────────────────────────────────────── */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.weekNav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.monthLabel {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+    min-width: 180px;
+}
+
+.monthNavBtn {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.monthNavBtn:hover {
+    background: var(--color-bg-hover);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.todayBtn {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    margin-left: 4px;
+}
+
+.todayBtn:hover {
+    background: var(--color-bg-hover);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.newEventBtn {
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 9px 18px;
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.newEventBtn:hover {
+    background: var(--color-primary-hover);
+    box-shadow: 0 4px 14px rgba(149, 128, 255, 0.4);
+}
+
+/* ── Week container ────────────────────────────────────────────── */
+
+.weekContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: var(--color-bg-card);
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+    border: 1px solid var(--color-border);
+    border-bottom: none;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+}
+
+/* ── Day header row ────────────────────────────────────────────── */
+
+.weekDayHeaders {
+    display: flex;
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-card);
+}
+
+.timeGutterHeader {
+    width: 56px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--color-border);
+}
+
+.dayHeaderCell {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    gap: 4px;
+    border-right: 1px solid var(--color-border-light);
+}
+
+.dayHeaderCell:last-child {
+    border-right: none;
+}
+
+.dayHeaderToday {
+    background: rgba(149, 128, 255, 0.04);
+}
+
+.dayName {
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.dayNum {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.dayNumToday {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+/* ── Scrollable grid ───────────────────────────────────────────── */
+
+.gridScroll {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: clip;
+}
+
+.gridScroll::-webkit-scrollbar {
+    width: 4px;
+}
+
+.gridScroll::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 2px;
+}
+
+.gridInner {
+    display: flex;
+    position: relative;
+    overflow: visible;
+}
+
+/* ── Time gutter (hour labels) ─────────────────────────────────── */
+
+.timeGutter {
+    width: 56px;
+    flex-shrink: 0;
+    border-right: 1px solid var(--color-border);
+}
+
+.hourLabel {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0 8px 0 0;
+    box-sizing: border-box;
+    position: relative;
+    top: -8px;
+}
+
+.hourLabel span {
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    letter-spacing: 0.02em;
+}
+
+/* ── Day columns ───────────────────────────────────────────────── */
+
+.dayColumn {
+    flex: 1;
+    position: relative;
+    overflow: visible;
+    border-right: 1px solid var(--color-border-light);
+}
+
+.dayColumn:last-child {
+    border-right: none;
+}
+
+.dayColumnToday {
+    background: rgba(149, 128, 255, 0.025);
+}
+
+.hourCell {
+    width: 100%;
+    border-bottom: 1px solid var(--color-border-light);
+    box-sizing: border-box;
+}
+
+/* ── Current time line ─────────────────────────────────────────── */
+
+.currentTimeLine {
+    position: absolute;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.currentTimeLine::after {
+    content: '';
+    flex: 1;
+    height: 1.5px;
+    background: var(--color-primary);
+    opacity: 0.8;
+}
+
+.currentTimeDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    flex-shrink: 0;
+    margin-left: -4px;
+}
+
+/* ── Event blocks ──────────────────────────────────────────────── */
+
+.eventBlock {
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    background: var(--color-primary-light);
+    border-left: 3px solid var(--color-primary);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    padding: 4px 7px 6px 7px;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    transition: filter 0.15s;
+    box-sizing: border-box;
+}
+
+.eventBlock:hover {
+    filter: brightness(1.1);
+}
+
+.eventBlockTitle {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+}
+
+.eventBlockTime {
+    font-size: 0.67rem;
+    color: var(--color-text-primary);
+    opacity: 0.6;
+    margin-top: 1px;
+}
+
+.eventBlockMeta {
+    font-size: 0.67rem;
+    color: var(--color-text-primary);
+    opacity: 0.65;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ── Event popup ───────────────────────────────────────────────── */
+
+.popupBackdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+}
+
+.eventPopup {
+    position: fixed;
+    z-index: 10000;
+    animation: popupIn 0.15s ease;
+}
+
+@keyframes popupIn {
+    from { opacity: 0; transform: scale(0.95) translateY(-4px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.popupInner {
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-modal);
+    width: 280px;
+    overflow: hidden;
+}
+
+.popupHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 14px 10px 14px;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.popupAccent {
+    width: 3px;
+    height: 18px;
+    border-radius: 99px;
+    background: var(--color-primary);
+    flex-shrink: 0;
+}
+
+.popupTitle {
+    flex: 1;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+}
+
+.popupClose {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+}
+
+.popupClose:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text-primary);
+}
+
+.popupBody {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.popupRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+}
+
+.popupRow i {
+    font-size: 0.88rem;
+    color: var(--color-primary);
+    flex-shrink: 0;
+}
+
+/* ── Create event modal ────────────────────────────────────────── */
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(6px);
+}
+
+.modalContent {
+    background: var(--color-bg-elevated);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    min-width: 480px;
+    max-width: 560px;
+    box-shadow: var(--shadow-modal);
+    border: 1px solid var(--color-border);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-12px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modalHeader h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    letter-spacing: -0.02em;
+}
+
+.modalClose {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-md);
+    transition: background 0.15s, color 0.15s;
+}
+
+.modalClose:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text-primary);
+}
+
+.formGroup {
+    margin-bottom: 14px;
+    flex: 1;
+}
+
+.formGroup label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    background: var(--color-bg-input);
+    color: var(--color-text-primary);
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.formGroup input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(149, 128, 255, 0.15);
+}
+
+.formRow {
+    display: flex;
+    gap: 10px;
+}
+
+.modalActions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btnCancel {
+    background: var(--color-bg-input);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 9px 20px;
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btnCancel:hover {
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+}
+
+.btnSubmit {
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 9px 20px;
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btnSubmit:hover {
+    background: var(--color-primary-hover);
+    box-shadow: 0 4px 14px rgba(149, 128, 255, 0.4);
+}
+
+.saveError {
+    color: #F87171;
+    font-size: 0.82rem;
+    margin: 8px 0 0 0;
+}

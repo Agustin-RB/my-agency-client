@@ -1,0 +1,1149 @@
+/* ── Tasks / Kanban board — Dark Studio ────────────────────────── */
+
+.tasksContainer {
+    padding: 28px;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--color-bg-app);
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    margin-bottom: 20px;
+    flex-shrink: 0;
+}
+
+.header h2 {
+    margin: 0 0 4px 0;
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.headerSubtitle {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+}
+
+/* ── View tabs ─────────────────────────────────────────────────── */
+.viewTabs { display:flex; gap:2px; margin-top:10px; background:var(--color-bg-input); border-radius:var(--radius-md); padding:3px; border:1px solid var(--color-border); width:fit-content; }
+.viewTab { background:none; border:none; border-radius:6px; padding:5px 14px; font-size:0.78rem; font-family:var(--font-sans); font-weight:500; color:var(--color-text-muted); cursor:pointer; transition:background 0.15s,color 0.15s; display:flex; align-items:center; gap:5px; }
+.viewTabActive { background:var(--color-bg-elevated); color:var(--color-primary); font-weight:600; box-shadow:0 1px 3px rgba(0,0,0,0.3); }
+
+/* ── Backlog ───────────────────────────────────────────────────── */
+.backlogContainer { flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:24px; padding-bottom:28px; }
+.backlogContainer::-webkit-scrollbar { width:4px; }
+.backlogContainer::-webkit-scrollbar-thumb { background:var(--color-border); border-radius:2px; }
+
+.backlogEmpty { display:flex; flex-direction:column; align-items:center; justify-content:center; flex:1; color:var(--color-text-muted); font-size:0.9rem; gap:4px; }
+
+.backlogGroup { display:flex; flex-direction:column; gap:2px; }
+
+.backlogMonthHeader { display:flex; align-items:center; gap:10px; padding:0 0 10px 0; border-bottom:1px solid var(--color-border); margin-bottom:4px; }
+.backlogMonthLabel { font-size:0.78rem; font-weight:700; color:var(--color-text-muted); text-transform:uppercase; letter-spacing:0.07em; }
+.backlogMonthCount { font-size:0.72rem; color:var(--color-text-muted); background:var(--color-bg-input); padding:2px 8px; border-radius:var(--radius-full); }
+
+.backlogList { display:flex; flex-direction:column; }
+
+.backlogItem {
+    display:flex; align-items:center; gap:12px;
+    padding:11px 14px;
+    background:var(--color-bg-card);
+    border:1px solid var(--color-border);
+    border-radius:var(--radius-lg);
+    cursor:pointer;
+    transition:background 0.12s, box-shadow 0.15s, border-color 0.15s;
+    margin-bottom:6px;
+    box-shadow:var(--shadow-card);
+}
+.backlogItem:last-child { margin-bottom:0; }
+.backlogItem:hover { background:var(--color-bg-elevated); border-color:rgba(149,128,255,0.25); box-shadow:var(--shadow-card-hover); }
+
+.backlogCheck { font-size:1rem; color:#34D399; flex-shrink:0; }
+.backlogTitle { font-size:0.85rem; font-weight:500; color:var(--color-text-primary); flex:1; min-width:0; }
+.backlogMeta { display:flex; align-items:center; gap:6px; flex-shrink:0; }
+.backlogAssignees { display:flex; flex-shrink:0; }
+.backlogDate { font-size:0.75rem; color:var(--color-text-muted); font-weight:500; white-space:nowrap; flex-shrink:0; min-width:44px; text-align:right; }
+
+/* ── Filtros ───────────────────────────────────────────────────── */
+
+.filtersBar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.filterSelect {
+    padding: 7px 12px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    background: var(--color-bg-input);
+    color: var(--color-text-primary);
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    min-width: 140px;
+}
+
+.filterSelect:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(149, 128, 255, 0.12);
+}
+
+.filterSelect.active {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.filterClearBtn {
+    background: none;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    border-radius: var(--radius-md);
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+
+.filterClearBtn:hover {
+    border-color: var(--color-text-secondary);
+    color: var(--color-text-primary);
+}
+
+/* ── Agregar columna ───────────────────────────────────────────── */
+
+.addColumnBtn {
+    min-width: 52px;
+    max-width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    border: 1px dashed var(--color-border);
+    background: none;
+    color: var(--color-text-muted);
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 0;
+}
+
+.addColumnBtn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+/* ── Column drag handle & edit ─────────────────────────────────── */
+
+.columnDragHandle {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    cursor: grab;
+    padding: 2px 4px;
+    border-radius: 4px;
+    line-height: 1;
+    transition: color 0.15s;
+    flex-shrink: 0;
+}
+
+.columnDragHandle:hover {
+    color: var(--color-text-secondary);
+}
+
+.columnDragHandle:active {
+    cursor: grabbing;
+}
+
+.columnEditBtn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    padding: 4px 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.15s, color 0.15s;
+    flex-shrink: 0;
+}
+
+.columnEditBtn:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text-primary);
+}
+
+/* ── Column edit panel ─────────────────────────────────────────── */
+
+.columnEditPanel {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    box-shadow: var(--shadow-modal);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.columnEditPanel input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    background: var(--color-bg-input);
+    color: var(--color-text-primary);
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+}
+
+.columnEditPanel input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(149, 128, 255, 0.15);
+}
+
+.colorSwatches {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+}
+
+.colorSwatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.1s, border-color 0.1s;
+    flex-shrink: 0;
+}
+
+.colorSwatch:hover {
+    transform: scale(1.15);
+}
+
+.colorSwatch.selected {
+    border-color: var(--color-text-primary);
+    transform: scale(1.15);
+}
+
+.columnEditActions {
+    display: flex;
+    gap: 7px;
+}
+
+.columnEditSaveBtn {
+    flex: 1;
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.columnEditSaveBtn:hover {
+    background: var(--color-primary-hover);
+}
+
+.columnEditCancelBtn {
+    background: var(--color-bg-input);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 7px 12px;
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.columnEditCancelBtn:hover {
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+}
+
+/* ── Column dragging states ────────────────────────────────────── */
+
+.columnDraggingActive {
+    opacity: 0.4;
+    transform: scale(0.98) rotate(1deg);
+}
+
+.columnDragTarget {
+    outline: 2px dashed var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 12px;
+}
+
+/* ── Board ─────────────────────────────────────────────────────── */
+
+.board {
+    display: flex;
+    gap: 14px;
+    flex: 1;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 16px;
+}
+
+.board::-webkit-scrollbar {
+    height: 5px;
+}
+
+.board::-webkit-scrollbar-thumb {
+    background: #2A2A38;
+    border-radius: 3px;
+}
+
+/* ── Columna ───────────────────────────────────────────────────── */
+
+.column {
+    background: var(--color-bg-card);
+    border-radius: 12px;
+    min-width: 300px;
+    max-width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--color-border);
+    position: relative;
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.columnHeader {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--color-border-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    background: var(--color-bg-elevated);
+    border-radius: 12px 12px 0 0;
+}
+
+.columnTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.columnTitle h3 {
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--color-text-secondary);
+    letter-spacing: -0.01em;
+}
+
+.columnBadge {
+    background: var(--color-border);
+    color: var(--color-text-muted);
+    border-radius: 9999px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.addButton {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+}
+
+.addButton:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.columnContent {
+    padding: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
+}
+
+.columnContent::-webkit-scrollbar {
+    width: 3px;
+}
+
+.columnContent::-webkit-scrollbar-thumb {
+    background: #2A2A38;
+    border-radius: 2px;
+}
+
+/* ── Tarea ─────────────────────────────────────────────────────── */
+
+.task {
+    background: var(--color-bg-app);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 14px;
+    cursor: grab;
+    transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+    position: relative;
+}
+
+.task:hover {
+    border-color: rgba(149, 128, 255, 0.25);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    transform: translateY(-1px);
+}
+
+.task:active {
+    cursor: grabbing;
+}
+
+.taskHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.taskTitle {
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+}
+
+.taskDescription {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.55;
+}
+
+.taskLabels {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.taskLabel {
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-weight: 600;
+}
+
+.taskLabel.priority-high {
+    background: rgba(248, 113, 113, 0.15);
+    color: #F87171;
+}
+
+.taskLabel.priority-medium {
+    background: rgba(245, 200, 66, 0.15);
+    color: #F5C842;
+}
+
+.taskLabel.priority-low {
+    background: rgba(52, 211, 153, 0.15);
+    color: #34D399;
+}
+
+.taskLabel.type {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.taskFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.taskAssignee {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.taskAvatarStack {
+    display: flex;
+    align-items: center;
+}
+
+.taskAvatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--color-bg-card);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    margin-left: -5px;
+    object-fit: cover;
+}
+
+.taskAvatarStack .taskAvatar:first-child {
+    margin-left: 0;
+}
+
+.taskAvatarMore {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 0.6rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -5px;
+    border: 2px solid var(--color-bg-card);
+}
+
+.taskDate {
+    font-size: 0.72rem;
+    color: var(--color-text-muted);
+}
+
+/* ── Variantes de columna ──────────────────────────────────────── */
+
+.column.todo .columnTitle h3 { color: var(--color-text-secondary); }
+.column.inProgress .columnTitle h3 { color: var(--color-primary); }
+.column.review .columnTitle h3 { color: #22D3EE; }
+.column.done .columnTitle h3 { color: #34D399; }
+
+.column.inProgress .columnBadge { background: var(--color-primary-light); color: var(--color-primary); }
+.column.review .columnBadge { background: rgba(34, 211, 238, 0.12); color: #22D3EE; }
+.column.done .columnBadge { background: rgba(52, 211, 153, 0.12); color: #34D399; }
+
+/* ── Drag & Drop ───────────────────────────────────────────────── */
+
+.taskDragHandle {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    cursor: grab;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+
+.task:hover .taskDragHandle {
+    opacity: 1;
+}
+
+.taskDragging {
+    opacity: 0.4;
+    transform: rotate(2deg) scale(1.02);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    border-color: var(--color-primary);
+}
+
+.columnDragOver {
+    background: var(--color-primary-light);
+    border: 1px dashed var(--color-primary);
+}
+
+.columnDragOver .columnContent {
+    background: transparent;
+}
+
+@keyframes taskDropped {
+    0% { transform: scale(1.03); box-shadow: 0 4px 20px rgba(149, 128, 255, 0.3); }
+    100% { transform: scale(1); box-shadow: none; }
+}
+
+.task:not(.taskDragging) {
+    animation: taskDropped 0.25s ease;
+}
+
+/* ── Modal de tarea ────────────────────────────────────────────── */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(6px);
+}
+
+.modalContent {
+    background: var(--color-bg-elevated);
+    border-radius: 14px;
+    padding: 28px;
+    min-width: 480px;
+    max-width: 560px;
+    box-shadow: var(--shadow-modal);
+    border: 1px solid var(--color-border);
+    animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-12px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.formGroup {
+    margin-bottom: 16px;
+}
+
+.formGroup label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    box-sizing: border-box;
+    font-family: var(--font-sans);
+    color: var(--color-text-primary);
+    background: var(--color-bg-input);
+}
+
+.formGroup textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(149, 128, 255, 0.15);
+}
+
+/* ── Multi-select assignee ─────────────────────────────────────── */
+
+.assigneeDropdownWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.assigneeTrigger {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-bg-input);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    text-align: left;
+    transition: border-color 0.15s;
+}
+
+.assigneeTrigger:hover {
+    border-color: var(--color-primary);
+}
+
+.assigneeTriggerAvatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--color-border);
+}
+
+.assigneeList {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-height: 180px;
+    overflow-y: auto;
+    margin-top: 4px;
+}
+
+.assigneeItem {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg-input);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.assigneeItem:hover {
+    border-color: var(--color-primary);
+    background: var(--color-bg-hover);
+}
+
+.assigneeItemSelected {
+    border-color: var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+.assigneeAvatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.assigneeName {
+    flex: 1;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-primary);
+}
+
+.assigneeCheck {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    color: transparent;
+    flex-shrink: 0;
+    transition: all 0.15s;
+}
+
+.assigneeItemSelected .assigneeCheck {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+}
+
+.modalActions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.btnCancel {
+    background: var(--color-bg-input);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 9px 20px;
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btnCancel:hover {
+    background: var(--color-bg-elevated);
+    color: var(--color-text-primary);
+}
+
+.btnSubmit {
+    background: var(--color-primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 20px;
+    font-size: 0.875rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btnSubmit:hover {
+    background: var(--color-primary-hover);
+    box-shadow: 0 4px 14px rgba(149, 128, 255, 0.4);
+}
+
+/* ── Modal Jira (detalle de tarea) ─────────────────────────────── */
+
+.jiraModal {
+    background: var(--color-bg-elevated);
+    border-radius: 14px;
+    width: 880px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: var(--shadow-modal);
+    border: 1px solid var(--color-border);
+    animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.jiraHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--color-border-light);
+    background: var(--color-bg-card);
+}
+
+.jiraHeaderLeft {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.jiraTaskId {
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.jiraTaskId:hover {
+    text-decoration: underline;
+}
+
+.jiraHeaderSeparator {
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+}
+
+.jiraParentTask {
+    color: var(--color-text-secondary);
+    font-size: 0.8rem;
+}
+
+.jiraHeaderRight {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.jiraHeaderBtn {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    padding: 7px;
+    border-radius: 7px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+}
+
+.jiraHeaderBtn:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.jiraCloseBtn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 22px;
+    padding: 4px 7px;
+    border-radius: 7px;
+    cursor: pointer;
+    line-height: 1;
+    transition: background 0.15s, color 0.15s;
+}
+
+.jiraCloseBtn:hover {
+    background: var(--color-bg-input);
+    color: var(--color-text-primary);
+}
+
+.jiraContent {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.jiraMain {
+    flex: 1;
+    padding: 20px 28px;
+    overflow-y: auto;
+    border-right: 1px solid var(--color-border-light);
+    background: var(--color-bg-elevated);
+}
+
+.jiraMain::-webkit-scrollbar {
+    width: 4px;
+}
+
+.jiraMain::-webkit-scrollbar-thumb {
+    background: #2A2A38;
+    border-radius: 3px;
+}
+
+.jiraTitle {
+    font-family: var(--font-display);
+    color: var(--color-text-primary);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+}
+
+.jiraSection {
+    margin-bottom: 20px;
+}
+
+.jiraSectionHeader {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.jiraSectionHeader h3 {
+    color: var(--color-text-muted);
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+.jiraSectionIcon {
+    color: var(--color-primary);
+    font-size: 0.7rem;
+}
+
+.jiraBadge {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.jiraAddBtn {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 4px 7px;
+    border-radius: 6px;
+    transition: background 0.15s, color 0.15s;
+}
+
+.jiraAddBtn:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.jiraDescription {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    padding: 14px;
+    background: var(--color-bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    transition: border-color 0.15s;
+}
+
+.jiraDescription:hover {
+    border-color: rgba(149, 128, 255, 0.2);
+}
+
+.jiraAttachments {
+    min-height: 56px;
+}
+
+.jiraAttachmentEmpty {
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    padding: 18px;
+    text-align: center;
+    background: var(--color-bg-card);
+    border-radius: 8px;
+    border: 1px dashed var(--color-border);
+}
+
+.jiraAddSubtask {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding: 7px 0;
+    font-weight: 500;
+    font-family: var(--font-sans);
+    transition: color 0.15s;
+}
+
+.jiraAddSubtask:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+}
+
+/* Sidebar del modal Jira */
+.jiraSidebar {
+    width: 280px;
+    padding: 18px;
+    overflow-y: auto;
+    background: var(--color-bg-card);
+}
+
+.jiraSidebarHeader {
+    margin-bottom: 16px;
+}
+
+.jiraStatusBadge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.3px;
+}
+
+.jiraSidebarSection {
+    margin-bottom: 14px;
+}
+
+.jiraSidebarTitle {
+    color: var(--color-text-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-border-light);
+    letter-spacing: -0.01em;
+}
+
+.jiraDetailRow {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.jiraDetailLabel {
+    color: var(--color-text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.jiraDetailValue {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--color-text-primary);
+    font-size: 0.875rem;
+}
+
+.jiraAvatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-border);
+}
+
+.jiraTag {
+    padding: 3px 9px;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 600;
+}
+
+.priority-high {
+    background: rgba(248, 113, 113, 0.15) !important;
+    color: #F87171 !important;
+}
+
+.priority-medium {
+    background: rgba(245, 200, 66, 0.15) !important;
+    color: #F5C842 !important;
+}
+
+.priority-low {
+    background: rgba(52, 211, 153, 0.15) !important;
+    color: #34D399 !important;
+}
+
+.jiraTypeTag {
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.jiraIdLink {
+    color: var(--color-primary);
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.15s;
+}
+
+.jiraIdLink:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+}
